@@ -13,21 +13,23 @@ form.addEventListener('submit', event => {
         return;
     }
     showLoader();
-    const data = getImagesByQuery(query);
-    data.then(response => {
-        if (response.hits.length === 0) {
-            iziToast.error({
-                message: 'Sorry, there are no images matching your search query. Please try again!',
-                position: 'topRight'
-            });
-            return;
-        }
-        createGallery(response.hits);
-    }).catch(() => {
-        iziToast.error({ message: "❌ Error fetching images from PIXABAY`", position: 'topRight' });
-    })
+    getImagesByQuery(query)
+        .then(response => {
+            if (response.hits.length === 0) {
+                iziToast.error({
+                    message: 'Sorry, there are no images matching your search query. Please try again!',
+                    position: 'topRight'
+                });
+                return;
+            }
+            createGallery(response.hits);
+        })
+        .catch(() => {
+            iziToast.error({ message: "❌ Error fetching images from PIXABAY`", position: 'topRight' });
+        })
         .finally(() => {
             hideLoader();
         });
+
     form.reset();
 });
