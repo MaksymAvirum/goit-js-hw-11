@@ -31,7 +31,7 @@ export function clearGallery() {
     gallery.innerHTML = '';
 }
 
-const loader = document.querySelector('.loader');
+const loader = document.querySelector('.div-loader');
 export function showLoader() {
     loader.classList.remove('hidden');
 }
